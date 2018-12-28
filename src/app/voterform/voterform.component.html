@@ -1,0 +1,58 @@
+<h2 class="text-center text-danger">Voter RegistrationForm</h2>
+<form [formGroup] ="form" (ngSubmit)='processForm()' style="width:300px" class="mx-auto d-block">
+<div class="form-group" formArrayName="addresses">
+<div *ngFor="let address of form.controls.addresses['controls']; let i=index;">
+  <div class="panel">
+    <div class="panel-heading text-success">
+VOTER #{{i+1}}
+
+<span (click)="removeAddress()" *ngIf='form.controls.addresses.length > 1' class="float-right">Remove</span>
+    </div>
+<div class="panel-body"[formGroupName]="i">
+<div class="form-group" >
+  <label>Name</label>
+<input type="text" class="form-control" formControlName="name" required>
+</div>
+<div class="form-group" >
+  <label>Age</label>
+    <input type="text"  class="form-control" formControlName="age" required>
+    </div>
+    <div class="form-group" >
+      <label>City</label>
+        <input type="text" class="form-control" formControlName="city" required>
+        </div>
+        <div class="form-group" >
+          <label>State</label>
+            <input type="text"  class="form-control" formControlName="state" required>
+            </div>
+</div>
+  </div>
+
+</div>
+</div>
+<div>
+  <a (click)="addAddresses()" class="btn btn-primary text-white ml-4"> ADD</a>
+
+
+  <button type="submit" class="btn btn-primary ml-5">submit</button>
+</div>
+</form>
+<hr>
+<h3 class="text-center">List of Registered Users</h3>
+
+<table class="table ">
+<thead class="bg-dark">
+  <th class="text-white">Name</th>
+  <th class="text-white">Age</th>
+  <th class="text-white">City</th>
+  <th class="text-white">State</th>
+</thead>
+<tbody *ngFor="let x of form.value.addresses">
+  <tr>
+    <td>{{x.name | json}}</td>
+    <td>{{x.age | json}}</td>
+    <td>{{x.city | json}}</td>
+    <td>{{x.state | json}}</td>
+  </tr>
+</tbody>
+</table>
